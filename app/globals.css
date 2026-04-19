@@ -1,0 +1,99 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 255, 255, 255;
+  --background-start-rgb: 10, 14, 23;
+  --background-end-rgb: 5, 7, 10;
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: radial-gradient(circle at top, #0a0e17 0%, #05070a 100%);
+  margin: 0;
+  padding: 0;
+}
+
+/* Custom Typography */
+.font-orbitron {
+  font-family: var(--font-orbitron), sans-serif;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+  background-color: #05070a;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #05070a;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1e2a3a;
+  border-radius: 5px;
+  border: 2px solid #05070a;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #ff6b35;
+}
+
+/* Selection color */
+::selection {
+  background: #ff6b35;
+  color: white;
+}
+
+/* Focus styles */
+:focus-visible {
+  outline: 2px solid #ff6b35;
+  outline-offset: 2px;
+}
+
+/* Text Shadow */
+.text-glow {
+  text-shadow: 0 0 20px rgba(255, 107, 53, 0.4);
+}
+
+/* 3D Canvas Polish */
+canvas {
+  touch-action: none;
+}
+
+/* Glassmorphism */
+.glass {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Animated Grid Background */
+@keyframes grid-move {
+  0% { background-position: 0 0; }
+  100% { background-position: 40px 40px; }
+}
+
+.bg-grid-animate {
+  animation: grid-move 4s linear infinite;
+}
+
+/* Image Hover Scale */
+.img-zoom-container {
+  overflow: hidden;
+}
+
+.img-zoom-container img {
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.img-zoom-container:hover img {
+  transform: scale(1.08);
+}
