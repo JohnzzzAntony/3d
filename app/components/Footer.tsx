@@ -14,7 +14,7 @@ export default function Footer() {
           <div className="space-y-8">
             <div className="flex items-center space-x-3">
               <div className="w-10 h-10 bg-industrial-accent rounded-lg flex items-center justify-center font-orbitron font-black text-white">W</div>
-              <span className="font-orbitron font-bold text-xl tracking-tighter text-slate-900">WEKA MACHINES</span>
+              <span className="font-orbitron font-bold text-xl tracking-tighter text-slate-900">INDUSTRIAL MACHINES</span>
             </div>
             <p className="text-slate-500 text-sm leading-relaxed font-medium">
               Global leaders in surface preparation and industrial automation since 1987. 
@@ -72,7 +72,7 @@ export default function Footer() {
 
         <div className="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-black/5 gap-6">
           <div className="text-slate-400 text-[10px] font-bold uppercase tracking-[0.3em]">
-            © {currentYear} WEKA Machineries FZE. All Rights Reserved.
+            © {currentYear} Global Machineries FZE. All Rights Reserved.
           </div>
           <div className="flex items-center space-x-8">
              <div className="flex items-center space-x-2 text-green-600">

@@ -6,7 +6,7 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const orbitron = Orbitron({ subsets: ["latin"], variable: "--font-orbitron" });
 
 export const metadata: Metadata = {
-  title: "Weka Machineries and Tools | Industrial Equipment Supplier",
+  title: "Industrial Machineries and Tools | Equipment Supplier",
   description: "Premium supplier of shot blast machines, surface preparation equipment, and industrial machinery solutions worldwide.",
   keywords: ["shot blast machine", "industrial equipment", "surface preparation", "machinery supplier"],
 };

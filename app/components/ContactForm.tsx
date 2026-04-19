@@ -19,7 +19,7 @@ export default function ContactForm() {
   };
 
   const contactInfo = [
-    { icon: Mail, label: "Secure Link", value: "ops@weka-machineries.com" },
+    { icon: Mail, label: "Secure Link", value: "ops@industrial-systems.com" },
     { icon: Phone, label: "Direct Comms", value: "+1 (800) 900-SPEC" },
     { icon: MapPin, label: "Location", value: "Industrial Alpha, Zone 4, MI" },
   ];

@@ -49,7 +49,7 @@ export default function Home() {
               </div>
               <div className="flex flex-col">
                 <span className="font-orbitron font-bold text-xl tracking-wider leading-none text-slate-900">
-                  WEKA <span className="text-industrial-accent">MACHINERIES</span>
+                  INDUSTRIAL <span className="text-industrial-accent">MACHINERIES</span>
                 </span>
                 <span className="text-[10px] text-slate-500 uppercase tracking-[0.3em] font-semibold">Engineering Excellence</span>
               </div>
