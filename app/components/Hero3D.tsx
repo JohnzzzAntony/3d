@@ -1,20 +1,19 @@
 "use client";
 
 import { Canvas, useFrame } from "@react-three/fiber";
-import { OrbitControls, MeshTransmissionMaterial, Environment, Float, PerspectiveCamera } from "@react-three/drei";
+import { OrbitControls, MeshTransmissionMaterial, Environment, Float, PerspectiveCamera, ContactShadows } from "@react-three/drei";
 import { useRef, Suspense, useMemo } from "react";
 import * as THREE from "three";
 
-function Gear({ color = "#ff6b35", ...props }) {
+function Gear({ color = "#ffffff", ...props }) {
   const ref = useRef<THREE.Group>(null);
   
-  // Use useMemo for geometry to avoid re-creation
-  const gearGeometry = useMemo(() => new THREE.CylinderGeometry(1.5, 1.5, 0.4, 32), []);
-  const toothGeometry = useMemo(() => new THREE.BoxGeometry(0.3, 0.5, 0.6), []);
+  const gearGeometry = useMemo(() => new THREE.CylinderGeometry(1.5, 1.5, 0.4, 64), []);
+  const toothGeometry = useMemo(() => new THREE.BoxGeometry(0.3, 0.4, 0.6), []);
 
   useFrame((state) => {
     if (!ref.current) return;
-    ref.current.rotation.z += 0.005;
+    ref.current.rotation.z += 0.003;
   });
 
   return (
@@ -22,27 +21,33 @@ function Gear({ color = "#ff6b35", ...props }) {
       <mesh geometry={gearGeometry}>
         <MeshTransmissionMaterial 
           backside
-          samples={4} // Reduced samples for performance
-          thickness={0.5}
-          roughness={0.1}
-          transmission={0.9}
-          ior={1.2}
+          samples={8}
+          thickness={0.8}
+          roughness={0.05}
+          transmission={1}
+          ior={1.5}
+          chromaticAberration={0.06}
+          anisotropicBlur={0.1}
           color={color}
         />
       </mesh>
-      {/* Reduced teeth count for performance */}
-      {Array.from({ length: 8 }).map((_, i) => (
+      {Array.from({ length: 12 }).map((_, i) => (
         <mesh 
           key={i} 
           geometry={toothGeometry}
           position={[
-            Math.cos((i / 8) * Math.PI * 2) * 1.5,
-            Math.sin((i / 8) * Math.PI * 2) * 1.5,
+            Math.cos((i / 12) * Math.PI * 2) * 1.5,
+            Math.sin((i / 12) * Math.PI * 2) * 1.5,
             0
           ]}
-          rotation={[0, 0, (i / 8) * Math.PI * 2]}
+          rotation={[0, 0, (i / 12) * Math.PI * 2]}
         >
-          <meshStandardMaterial color={color} metalness={0.8} roughness={0.2} />
+          <meshPhysicalMaterial 
+            color={color} 
+            metalness={0.9} 
+            roughness={0.1} 
+            reflectivity={1} 
+          />
         </mesh>
       ))}
     </group>
@@ -51,26 +56,35 @@ function Gear({ color = "#ff6b35", ...props }) {
 
 export default function Hero3D() {
   return (
-    <div className="absolute inset-0 z-0">
+    <div className="absolute inset-0 z-0 opacity-80">
       <Canvas 
         shadows 
-        dpr={[1, 1.5]} // Limit DPR for performance
-        gl={{ antialias: false, powerPreference: "high-performance" }} // Boost perf
+        dpr={[1, 2]} 
+        gl={{ antialias: true, powerPreference: "high-performance" }}
       >
         <Suspense fallback={null}>
-          <PerspectiveCamera makeDefault position={[0, 0, 5]} fov={50} />
+          <PerspectiveCamera makeDefault position={[0, 0, 6]} fov={45} />
           
-          <ambientLight intensity={0.5} />
-          <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={1} castShadow />
-          <pointLight position={[-10, -10, -10]} intensity={0.5} />
+          <ambientLight intensity={0.2} />
+          <spotLight position={[10, 10, 10]} angle={0.15} penumbra={1} intensity={1.5} castShadow />
+          <pointLight position={[-10, 10, -5]} intensity={1} color="#ff6b35" />
 
-          <Float speed={1.5} rotationIntensity={0.5} floatIntensity={0.5}>
-            <Gear position={[1.5, 0.5, 0]} rotation={[0.5, 0, 0.5]} color="#ff6b35" scale={1.2} />
-            <Gear position={[-1.5, -1, -1]} rotation={[1, 0, 0]} color="#4a5a6a" scale={0.8} />
+          <Float speed={2} rotationIntensity={0.6} floatIntensity={0.6}>
+            <Gear position={[1.8, 0, 0]} rotation={[0.4, 0.2, 0]} color="#ffffff" scale={1.3} />
+            <Gear position={[-2.2, -1.2, -1]} rotation={[1.1, 0.3, 0.5]} color="#ff6b35" scale={0.9} />
           </Float>
 
-          <Environment preset="warehouse" background={false} blur={1} />
+          <ContactShadows 
+            position={[0, -3.5, 0]} 
+            opacity={0.4} 
+            scale={15} 
+            blur={2.5} 
+            far={4.5} 
+          />
+
+          <Environment preset="city" />
         </Suspense>
+        <OrbitControls enableZoom={false} enablePan={false} />
       </Canvas>
     </div>
   );
