@@ -1,124 +1,116 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, useScroll, useSpring, useTransform } from "framer-motion";
 import { useRef } from "react";
-import { ArrowRight, Settings, Shield, Zap, Globe } from "lucide-react";
+import Image from "next/image";
+import { ChevronRight, Layers, Cpu, Shield } from "lucide-react";
 
 const products = [
   {
     id: "01",
-    title: "Shot Blast Machines",
-    subtitle: "Surface Treatment",
-    description: "High-efficiency systems for metal finishing, descaling, and cleaning applications with automated media recycling.",
+    name: "Tumble Blast Systems",
+    desc: "Automated batch processing for high-volume component finishing. Optimized for durability.",
     image: "/images/shot-blast-machine.png",
-    features: ["Digital Control Interface", "Advanced Dust Filtration", "Variable Speed Turbines"],
+    icon: Layers,
   },
   {
     id: "02",
-    title: "Sandblasting Units",
-    subtitle: "Abrasive Solutions",
-    description: "Professional-grade blasting cabinets and portable pots for precision surface preparation and material removal.",
+    name: "Linear Pass-Through",
+    desc: "Continuous surface treatment for structural steel and large plate sections.",
     image: "/images/sandblasting-equipment.png",
-    features: ["Pressure Regulation", "Multi-Nozzle Support", "Reinforced Blasting Chamber"],
+    icon: Cpu,
   },
   {
     id: "03",
-    title: "Conveyor Systems",
-    subtitle: "Material Handling",
-    description: "Custom-engineered conveyor solutions for integrated production lines with smart load-sensing technology.",
+    name: "Table Blast Units",
+    desc: "Precision engineering for delicate components requiring targeted abrasive impact.",
     image: "/images/conveyor-system.png",
-    features: ["Load Balancing", "Emergency Stops", "Modular Integration"],
+    icon: Shield,
   },
 ];
 
 export default function ProductShowcase() {
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
+  const containerRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start end", "end start"]
+  });
+
+  const smoothProgress = useSpring(scrollYProgress, {
+    stiffness: 50,
+    damping: 25
+  });
 
   return (
-    <section id="products" ref={ref} className="py-32 relative overflow-hidden bg-industrial-950">
-      {/* Background decoration */}
-      <div className="absolute top-0 left-0 w-full h-full opacity-10 pointer-events-none bg-grid-pattern" style={{ backgroundSize: '40px 40px' }} />
-      <div className="absolute top-0 left-1/4 w-px h-full bg-gradient-to-b from-transparent via-industrial-accent/20 to-transparent" />
-      <div className="absolute top-0 right-1/4 w-px h-full bg-gradient-to-b from-transparent via-industrial-accent/20 to-transparent" />
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <motion.div 
-          initial={{ opacity: 0, y: 20 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8 }}
-          className="mb-20 text-center lg:text-left flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8"
-        >
-          <div className="max-w-2xl">
-            <span className="text-industrial-accent font-bold tracking-[0.2em] uppercase text-xs mb-4 block">Product Engineering</span>
-            <h2 className="text-4xl sm:text-5xl lg:text-6xl font-orbitron font-extrabold leading-tight">
-              Mastery in <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-industrial-accent to-orange-400">
-                Performance
-              </span>
+    <section ref={containerRef} id="products" className="py-32 relative bg-industrial-950">
+      <div className="max-w-7xl mx-auto px-6 lg:px-12">
+        
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-24 gap-8">
+          <motion.div
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            className="space-y-6"
+          >
+            <div className="text-industrial-accent text-xs font-black tracking-[0.4em] uppercase">Inventory V.04</div>
+            <h2 className="text-4xl lg:text-6xl font-orbitron font-black leading-none">
+              ENGINEERED <br /> <span className="text-industrial-chrome">SOLUTIONS</span>
             </h2>
-          </div>
-          <p className="text-industrial-chrome max-w-md text-lg leading-relaxed lg:pb-2">
-            Our industrial catalog represents the pinnacle of surface engineering, built for 24/7 heavy-duty operations.
-          </p>
-        </motion.div>
+          </motion.div>
+          
+          <motion.p 
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            className="text-industrial-chrome max-w-sm text-lg font-medium"
+          >
+            Military-grade surface preparation technology designed for the world's most demanding environments.
+          </motion.p>
+        </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-10">
-          {products.map((product, index) => (
-            <motion.div
-              key={product.id}
-              initial={{ opacity: 0, y: 40 }}
-              animate={isInView ? { opacity: 1, y: 0 } : {}}
-              transition={{ duration: 0.6, delay: index * 0.2 }}
-              className="group relative flex flex-col bg-industrial-900/50 rounded-3xl overflow-hidden border border-white/5 hover:border-industrial-accent/40 hover:bg-industrial-800/50 transition-all duration-500 shadow-2xl"
-            >
-              {/* Card index decor */}
-              <div className="absolute top-6 right-8 text-5xl font-orbitron font-black text-white/5 group-hover:text-industrial-accent/10 transition-colors">
-                {product.id}
-              </div>
+        <div className="grid lg:grid-cols-3 gap-10">
+          {products.map((product, i) => {
+            const Icon = product.icon;
+            
+            // Unique scroll-transform for each card for "staggered flow"
+            const y = useTransform(smoothProgress, [0, 1], [100 * (i + 1), -100 * (i + 1)]);
 
-              <div className="relative h-72 overflow-hidden">
-                <img 
-                  src={product.image} 
-                  alt={product.title}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-industrial-900 via-transparent to-transparent opacity-60" />
-                
-                {/* Overlay Accent */}
-                <div className="absolute bottom-4 left-6 py-1 px-3 bg-industrial-accent/20 backdrop-blur-md rounded-full border border-industrial-accent/30">
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-industrial-accent">{product.subtitle}</span>
-                </div>
-              </div>
-              
-              <div className="p-8 flex flex-col flex-grow space-y-5">
-                <h3 className="text-2xl font-bold font-orbitron group-hover:text-industrial-accent transition-colors">
-                  {product.title}
-                </h3>
-                <p className="text-industrial-chrome leading-relaxed text-sm">
-                  {product.description}
-                </p>
-                
-                <div className="space-y-3 pt-2">
-                  {product.features.map((feature) => (
-                    <div key={feature} className="flex items-center text-xs text-industrial-steel font-medium">
-                      <Settings size={14} className="text-industrial-accent/60 mr-2" />
-                      {feature}
+            return (
+              <motion.div
+                key={product.id}
+                style={{ y }}
+                className="group relative"
+              >
+                <div className="relative aspect-[3/4] rounded-[3rem] overflow-hidden bg-industrial-900 border border-white/5 will-change-transform">
+                  <Image
+                    src={product.image}
+                    alt={product.name}
+                    fill
+                    className="object-cover transition-all duration-1000 group-hover:scale-110 grayscale-[0.5] group-hover:grayscale-0 opacity-40 group-hover:opacity-100"
+                  />
+                  
+                  <div className="absolute inset-0 bg-gradient-to-t from-industrial-950 via-industrial-950/20 to-transparent" />
+                  
+                  <div className="absolute top-10 left-10 text-6xl font-orbitron font-black opacity-10 text-white group-hover:opacity-30 transition-opacity">
+                    {product.id}
+                  </div>
+
+                  <div className="absolute bottom-12 left-10 right-10 space-y-4">
+                    <div className="w-12 h-12 rounded-2xl bg-industrial-accent/20 flex items-center justify-center border border-industrial-accent/30 group-hover:bg-industrial-accent transition-colors duration-500">
+                      <Icon className="text-industrial-accent group-hover:text-white" size={24} />
                     </div>
-                  ))}
+                    <h3 className="text-3xl font-orbitron font-black text-white">{product.name}</h3>
+                    <p className="text-industrial-chrome text-sm font-medium leading-relaxed opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-y-4 group-hover:translate-y-0">
+                      {product.desc}
+                    </p>
+                    <button className="flex items-center space-x-2 text-industrial-accent text-[10px] font-black uppercase tracking-[0.3em] opacity-0 group-hover:opacity-100 transition-all duration-700 delay-100">
+                      <span>View Specifications</span>
+                      <ChevronRight size={14} />
+                    </button>
+                  </div>
                 </div>
-                
-                <div className="pt-6 mt-auto">
-                  <motion.button
-                    whileHover={{ gap: '1rem' }}
-                    className="flex items-center text-white text-sm font-bold uppercase tracking-widest group/btn border-b border-industrial-accent/0 hover:border-industrial-accent transition-all pb-1"
-                  >
-                    Specifications <ArrowRight size={16} className="ml-2 text-industrial-accent" />
-                  </motion.button>
-                </div>
-              </div>
-            </motion.div>
-          ))}
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>
