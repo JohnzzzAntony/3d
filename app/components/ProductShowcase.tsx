@@ -4,6 +4,7 @@ import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 import { useRef } from "react";
 import Image from "next/image";
 import { ChevronRight, Cpu, Zap, Activity } from "lucide-react";
+import MagneticButton from "./MagneticButton";
 
 const products = [
   {
