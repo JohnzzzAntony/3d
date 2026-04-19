@@ -3,68 +3,55 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 15, 23, 42;
-  --background-start-rgb: 255, 255, 255;
-  --background-end-rgb: 248, 250, 252;
+  --foreground-rgb: 255, 255, 255;
+  --background-start-rgb: 2, 6, 23;
+  --background-end-rgb: 15, 23, 42;
 }
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: white;
+  background: #020617;
   margin: 0;
   padding: 0;
+  overflow-x: hidden;
 }
 
-/* Scroll handling */
-html {
-  scroll-behavior: auto !important; /* Normal scroll requested */
-  background-color: white;
-}
-
-/* Custom scrollbar - Light Theme */
+/* Cyber Scrollbar */
 ::-webkit-scrollbar {
-  width: 10px;
+  width: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #f1f5f9;
+  background: #020617;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #cbd5e1;
-  border-radius: 5px;
-  border: 2px solid #f1f5f9;
+  background: #0ea5e9;
+  border-radius: 10px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #ff6b35;
+  background: #38bdf8;
+  box-shadow: 0 0 10px #0ea5e9;
 }
 
-/* Selection color */
-::selection {
-  background: #ff6b35;
-  color: white;
+/* Glow Utilities */
+.text-glow {
+  text-shadow: 0 0 15px rgba(14, 165, 233, 0.5);
 }
 
-/* Glassmorphism - Light Mode */
-.glass {
-  background: rgba(255, 255, 255, 0.7);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(0, 0, 0, 0.05);
+.border-glow {
+  box-shadow: 0 0 20px rgba(14, 165, 233, 0.2);
 }
 
-/* Animated Grid Background - Soft */
-@keyframes grid-move {
-  0% { background-position: 0 0; }
-  100% { background-position: 40px 40px; }
+.cyber-grid {
+  background-image: linear-gradient(rgba(14, 165, 233, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(14, 165, 233, 0.05) 1px, transparent 1px);
+  background-size: 50px 50px;
 }
 
-.bg-grid-animate {
-  animation: grid-move 4s linear infinite;
-}
-
-/* Industrial Border */
-.industrial-border {
-  border: 1px solid rgba(0, 0, 0, 0.08);
+.glass-v2 {
+  background: rgba(15, 23, 42, 0.6);
+  backdrop-filter: blur(20px);
+  border: 1px solid rgba(14, 165, 233, 0.1);
 }
