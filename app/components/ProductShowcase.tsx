@@ -3,28 +3,28 @@
 import { motion, useScroll, useSpring, useTransform } from "framer-motion";
 import { useRef } from "react";
 import Image from "next/image";
-import { ChevronRight, Cpu, Zap, Activity } from "lucide-react";
+import { ChevronRight, Target, Shield, Zap } from "lucide-react";
 import MagneticButton from "./MagneticButton";
 
 const products = [
   {
-    id: "α-01",
-    name: "Tumble Quantum",
-    desc: "Quantum-stabilized batch processing for molecular-level finishing accuracy.",
+    id: "01",
+    name: "Tumble System X",
+    desc: "Industrial-grade surface treatment with obsidian core stabilization.",
     image: "/images/shot-blast-machine.png",
-    icon: Activity,
+    icon: Target,
   },
   {
-    id: "β-02",
-    name: "Linear Pass-Field",
-    desc: "Continuous field-aligned surface treatment for hyper-structural sections.",
+    id: "02",
+    name: "Linear Pass Pro",
+    desc: "High-precision pass-through engineering with vacuum-sealed protocols.",
     image: "/images/sandblasting-equipment.png",
-    icon: Cpu,
+    icon: Shield,
   },
   {
-    id: "γ-03",
-    name: "Table Sync Core",
-    desc: "Precision core engineering for delicate sub-atomic component integrity.",
+    id: "03",
+    name: "Delta Sync Core",
+    desc: "Advanced core synchronization for rapid manufacturing deployment.",
     image: "/images/conveyor-system.png",
     icon: Zap,
   },
@@ -38,66 +38,82 @@ export default function ProductShowcase() {
   });
 
   const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 40,
-    damping: 20
+    stiffness: 30,
+    damping: 10
   });
 
   return (
-    <section ref={containerRef} id="products" className="py-40 relative">
+    <section ref={containerRef} id="products" className="py-24 relative">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
         
-        <div className="mb-24 space-y-6">
-          <div className="flex items-center space-x-4">
-            <div className="h-0.5 w-12 bg-sky-500" />
-            <span className="text-sky-500 text-xs font-black uppercase tracking-[0.5em]">Inventory Stream</span>
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-32 gap-12">
+          <div className="space-y-6">
+            <motion.div 
+               initial={{ width: 0 }}
+               whileInView={{ width: 80 }}
+               className="h-1 bg-white opacity-20"
+            />
+            <h2 className="text-5xl lg:text-8xl font-orbitron font-black text-gradient leading-none tracking-tighter">
+              CHROME <br /> <span className="opacity-40 font-light italic">CATALOG</span>
+            </h2>
           </div>
-          <h2 className="text-5xl lg:text-7xl font-orbitron font-black leading-none italic">
-            DIGITAL <br /> <span className="text-sky-500 not-italic text-glow">RESOURCES</span>
-          </h2>
+          
+          <p className="text-xl text-zinc-500 max-w-sm font-medium leading-relaxed">
+            High-fidelity hardware captures reimagined for superior industrial visualization.
+          </p>
         </div>
 
-        <div className="grid lg:grid-cols-3 gap-16">
+        <div className="grid lg:grid-cols-3 gap-12">
           {products.map((product, i) => {
             const Icon = product.icon;
-            const y = useTransform(smoothProgress, [0, 1], [80 * (i + 1), -80 * (i + 1)]);
+            const y = useTransform(smoothProgress, [0, 1], [30 * (i + 1), -30 * (i + 1)]);
 
             return (
               <motion.div
                 key={i}
                 style={{ y }}
-                className="group relative"
+                className="group"
               >
-                <div className="relative aspect-[3/4] rounded-[2.5rem] p-1 glass-v2 transition-all duration-700 hover:border-sky-500/40">
-                  <div className="absolute inset-x-8 top-12 h-px bg-gradient-to-r from-transparent via-sky-500/20 to-transparent" />
+                <div className="relative aspect-[3/4.2] rounded-[3rem] overflow-hidden glass-card transition-all duration-1000 group-hover:border-white/20">
+                  <div className="absolute inset-0 bg-gradient-to-b from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
                   
-                  <div className="relative h-full w-full rounded-[2.3rem] overflow-hidden bg-[#0f172a]/40 backdrop-blur-md px-10 pt-20 pb-12 flex flex-col items-center text-center">
-                    <div className="absolute top-10 right-10 text-2xl font-orbitron font-black text-sky-500/10 group-hover:text-sky-500/20 transition-colors">
-                      {product.id}
+                  {/* Subtle Grid Interaction */}
+                  <div className="absolute inset-0 opacity-[0.03] group-hover:opacity-[0.05] transition-opacity" 
+                       style={{ backgroundImage: 'radial-gradient(#fff 1px, transparent 0)', backgroundSize: '24px 24px' }} />
+
+                  <div className="relative h-full flex flex-col p-12">
+                    <div className="flex justify-between items-start mb-12">
+                      <div className="w-16 h-16 rounded-2xl glass-premium flex items-center justify-center border border-white/5 group-hover:bg-white group-hover:border-white transition-all duration-700">
+                        <Icon className="text-zinc-500 group-hover:text-black" size={24} />
+                      </div>
+                      <span className="text-sm font-orbitron font-bold text-zinc-700 group-hover:text-white transition-colors">{product.id}</span>
                     </div>
                     
-                    <div className="relative w-40 h-40 mb-10">
-                      <div className="absolute inset-0 bg-sky-500/10 rounded-full blur-2xl group-hover:bg-sky-500/20 transition-all" />
+                    <div className="relative flex-1 mb-12">
                       <Image
                         src={product.image}
                         alt={product.name}
                         fill
-                        className="object-contain transition-transform duration-1000 group-hover:scale-110 group-hover:rotate-6 drop-shadow-[0_0_20px_rgba(14,165,233,0.3)] grayscale group-hover:grayscale-0"
+                        className="object-contain transition-transform duration-1000 group-hover:scale-110 grayscale group-hover:grayscale-0 drop-shadow-2xl"
                       />
                     </div>
 
-                    <div className="mt-auto space-y-4">
-                      <h3 className="text-2xl font-orbitron font-black text-white tracking-widest">{product.name}</h3>
-                      <p className="text-sky-100/40 text-sm font-medium leading-relaxed">
+                    <div className="space-y-4">
+                      <h3 className="text-3xl font-orbitron font-black text-white tracking-widest">{product.name}</h3>
+                      <p className="text-zinc-500 text-sm font-medium leading-relaxed group-hover:text-zinc-300 transition-colors">
                         {product.desc}
                       </p>
-                      
-                      <div className="pt-6">
-                         <MagneticButton>
-                            <div className="w-14 h-14 rounded-2xl bg-sky-500/10 border border-sky-500/20 flex items-center justify-center group-hover:bg-sky-500 group-hover:shadow-[0_0_20px_rgba(14,165,233,0.5)] transition-all duration-500">
-                               <ChevronRight className="text-sky-500 group-hover:text-white" size={24} />
-                            </div>
-                         </MagneticButton>
-                      </div>
+                    </div>
+
+                    <div className="pt-10 flex items-center justify-between">
+                       <button className="text-[10px] font-black uppercase tracking-[0.4em] text-zinc-600 group-hover:text-white transition-colors">
+                          Technical Data
+                       </button>
+                       <MagneticButton>
+                          <div className="w-12 h-12 rounded-full border border-white/5 flex items-center justify-center group-hover:bg-white transition-all">
+                             <ChevronRight size={20} className="text-zinc-500 group-hover:text-black" />
+                          </div>
+                       </MagneticButton>
                     </div>
                   </div>
                 </div>

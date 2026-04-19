@@ -4,54 +4,75 @@
 
 :root {
   --foreground-rgb: 255, 255, 255;
-  --background-start-rgb: 2, 6, 23;
-  --background-end-rgb: 15, 23, 42;
+  --background-start-rgb: 5, 5, 5;
+  --background-end-rgb: 15, 15, 15;
 }
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: #020617;
+  background: #050505;
   margin: 0;
   padding: 0;
   overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
 }
 
-/* Cyber Scrollbar */
+/* Premium Scrollbar */
 ::-webkit-scrollbar {
-  width: 6px;
+  width: 4px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #020617;
+  background: #050505;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #0ea5e9;
-  border-radius: 10px;
+  background: linear-gradient(to bottom, #333, #666);
+  border-radius: 20px;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: #38bdf8;
-  box-shadow: 0 0 10px #0ea5e9;
+/* Typography Refinements */
+.font-premium {
+  letter-spacing: -0.02em;
+  line-height: 1.1;
 }
 
-/* Glow Utilities */
-.text-glow {
-  text-shadow: 0 0 15px rgba(14, 165, 233, 0.5);
+.text-gradient {
+  background: linear-gradient(135deg, #fff 0%, #a1a1aa 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
-.border-glow {
-  box-shadow: 0 0 20px rgba(14, 165, 233, 0.2);
+/* Luxury Glassmorphism */
+.glass-premium {
+  background: rgba(255, 255, 255, 0.02);
+  backdrop-filter: blur(40px) saturate(150%);
+  -webkit-backdrop-filter: blur(40px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8);
 }
 
-.cyber-grid {
-  background-image: linear-gradient(rgba(14, 165, 233, 0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(14, 165, 233, 0.05) 1px, transparent 1px);
-  background-size: 50px 50px;
-}
-
-.glass-v2 {
-  background: rgba(15, 23, 42, 0.6);
+.glass-card {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0) 100%);
   backdrop-filter: blur(20px);
-  border: 1px solid rgba(14, 165, 233, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* Magnetic Glow */
+.glow-spot {
+  position: absolute;
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(circle, rgba(148, 163, 184, 0.05) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Micro-Interactions */
+.hover-lift {
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hover-lift:hover {
+  transform: translateY(-10px) scale(1.02);
 }
