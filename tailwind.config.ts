@@ -3,45 +3,45 @@ import type { Config } from "tailwindcss";
 const config: Config = {
   content: [
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
-    "./components/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
     extend: {
       fontFamily: {
-        sans: ["var(--font-inter)"],
+        inter: ["var(--font-inter)"],
         orbitron: ["var(--font-orbitron)"],
       },
       colors: {
         industrial: {
-          950: "#05070a",
-          900: "#0a0e17",
-          800: "#151e2d",
-          700: "#1e2a3a",
+          50: "#f8fafc",
+          100: "#f1f5f9",
+          200: "#e2e8f0",
+          300: "#cbd5e1",
+          400: "#94a3b8",
+          500: "#64748b",
+          600: "#475569",
+          700: "#334155",
+          800: "#1e293b",
+          900: "#0f172a",
+          950: "#020617",
+          // Accent Colors
           accent: "#ff6b35",
-          accentHover: "#e55a2b",
-          steel: "#64748b",
-          chrome: "#94a3b8",
-        },
-      },
-      animation: {
-        "float": "float 6s ease-in-out infinite",
-        "pulse-slow": "pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite",
-        "shine": "shine 2s linear infinite",
-      },
-      keyframes: {
-        float: {
-          "0%, 100%": { transform: "translateY(0)" },
-          "50%": { transform: "translateY(-20px)" },
-        },
-        shine: {
-          "0%": { backgroundPosition: "-200% 0" },
-          "100%": { backgroundPosition: "200% 0" },
+          accentHover: "#e85a2d",
+          chrome: "#64748b",
+          steel: "#94a3b8",
         },
       },
       backgroundImage: {
-        "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-        "metallic": "linear-gradient(135deg, #1e2a3a 0%, #0a0e17 50%, #151e2d 100%)",
-        "grid-pattern": "linear-gradient(to right, #ffffff05 1px, transparent 1px), linear-gradient(to bottom, #ffffff05 1px, transparent 1px)",
+        "grid-pattern": "linear-gradient(to right, #00000008 1px, transparent 1px), linear-gradient(to bottom, #00000008 1px, transparent 1px)",
+      },
+      animation: {
+        "spin-slow": "spin 8s linear infinite",
+        "scroll": "scroll 20s linear infinite",
+      },
+      keyframes: {
+        scroll: {
+          "0%": { transform: "translateX(0)" },
+          "100%": { transform: "translateX(-50%)" },
+        },
       },
     },
   },

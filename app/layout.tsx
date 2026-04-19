@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Orbitron } from "next/font/google";
 import "./globals.css";
-import SmoothScroll from "./components/SmoothScroll";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 const orbitron = Orbitron({ subsets: ["latin"], variable: "--font-orbitron" });
@@ -17,10 +16,8 @@ export default function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <html lang="en">
-      <body className={`${inter.variable} ${orbitron.variable} font-sans bg-industrial-950 text-white antialiased`}>
-        <SmoothScroll>
-          {children}
-        </SmoothScroll>
+      <body className={`${inter.variable} ${orbitron.variable} font-sans bg-white text-slate-900 antialiased`}>
+        {children}
       </body>
     </html>
   );

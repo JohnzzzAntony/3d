@@ -1,102 +1,88 @@
-import { Github, Linkedin, Twitter, Facebook, ArrowUpRight, ShieldCheck } from "lucide-react";
+"use client";
+
 import { motion } from "framer-motion";
+import { Github, Twitter, Linkedin, ArrowUpRight, Globe, ShieldCheck } from "lucide-react";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
-  
-  const footerLinks = {
-    Solutions: ["Shot Blast Machines", "Sandblasting Units", "Conveyor Hubs", "Robotic Arms", "Surface Analyzers"],
-    Resources: ["Engineering Specs", "Material Science", "Support Portal", "Case Studies", "Training"],
-    Corporate: ["Operational Alpha", "Manufacturing Hub", "Career Nexus", "Sustainability", "Partners"],
-    Compliance: ["ISO Standards", "Safety Protocols", "WEEE Directive", "REACH Policy", "Privacy"],
-  };
 
   return (
-    <footer className="relative bg-industrial-950 pt-32 pb-12 overflow-hidden">
-      {/* Structural Elements */}
-      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-industrial-accent/30 to-transparent" />
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-industrial-accent/5 blur-[120px] rounded-full pointer-events-none" />
-
+    <footer className="bg-slate-50 pt-24 pb-12 border-t border-black/5">
       <div className="max-w-7xl mx-auto px-6 lg:px-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-16 mb-24">
-          {/* Brand Identity */}
-          <div className="lg:col-span-2 space-y-8">
-            <div className="flex items-center space-x-4">
-              <div className="w-12 h-12 bg-industrial-accent rounded-xl rotate-45 flex items-center justify-center">
-                <span className="font-orbitron font-black text-white text-xl -rotate-45">W</span>
-              </div>
-              <div className="flex flex-col">
-                <span className="font-orbitron font-bold text-2xl tracking-tighter">
-                  WEKA <span className="text-industrial-accent">GLOBAL</span>
-                </span>
-                <span className="text-[9px] text-industrial-chrome uppercase tracking-[0.4em] font-bold">Industrial Vanguard</span>
-              </div>
+        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-16 mb-20">
+          
+          <div className="space-y-8">
+            <div className="flex items-center space-x-3">
+              <div className="w-10 h-10 bg-industrial-accent rounded-lg flex items-center justify-center font-orbitron font-black text-white">W</div>
+              <span className="font-orbitron font-bold text-xl tracking-tighter text-slate-900">WEKA MACHINES</span>
             </div>
-            
-            <p className="text-industrial-chrome text-sm leading-relaxed max-w-sm font-medium">
-              Architecting the future of industrial surface preparation. Delivering precision-engineered 
-              machinery for high-stakes manufacturing environments since 1987.
+            <p className="text-slate-500 text-sm leading-relaxed font-medium">
+              Global leaders in surface preparation and industrial automation since 1987. 
+              Engineering excellence for a resilient future.
             </p>
-
-            <div className="flex space-x-3">
-              {[Twitter, Linkedin, Facebook, Github].map((Icon, i) => (
-                <motion.a 
-                  key={i}
-                  href="#" 
-                  whileHover={{ y: -3, scale: 1.1 }}
-                  className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center text-industrial-chrome hover:text-industrial-accent hover:bg-white/10 border border-white/5 transition-colors"
-                >
+            <div className="flex space-x-4">
+              {[Twitter, Github, Linkedin].map((Icon, i) => (
+                <a key={i} href="#" className="w-10 h-10 rounded-xl bg-white border border-black/5 flex items-center justify-center hover:border-industrial-accent hover:text-industrial-accent transition-all">
                   <Icon size={18} />
-                </motion.a>
+                </a>
               ))}
             </div>
-            
-            <div className="pt-4 flex items-center space-x-3 text-[10px] font-black uppercase tracking-[0.2em] text-industrial-steel">
-              <ShieldCheck size={16} className="text-industrial-accent" />
-              <span>Verified Secure Chain</span>
-            </div>
           </div>
-          
-          {/* Link Clusters */}
-          {Object.entries(footerLinks).map(([title, links]) => (
-            <div key={title} className="space-y-6">
-              <h4 className="font-orbitron font-bold text-xs uppercase tracking-[0.3em] text-white">
-                {title}
-              </h4>
-              <ul className="space-y-3">
-                {links.map((link) => (
-                  <li key={link}>
-                    <a href="#" className="group flex items-center text-industrial-chrome hover:text-white transition-colors text-xs font-bold uppercase tracking-widest">
-                      {link} 
-                      <ArrowUpRight size={10} className="ml-1 opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all text-industrial-accent" />
-                    </a>
-                  </li>
-                ))}
-              </ul>
+
+          <div>
+            <h4 className="text-slate-900 font-orbitron font-bold text-sm uppercase tracking-widest mb-8">Solutions</h4>
+            <ul className="space-y-4">
+              {["Surface Prep", "Material Handling", "Automation", "Technical Audit"].map((link) => (
+                <li key={link}>
+                  <a href="#" className="text-slate-500 hover:text-industrial-accent text-sm font-medium transition-colors flex items-center group">
+                    <span>{link}</span>
+                    <ArrowUpRight size={12} className="ml-1 opacity-0 group-hover:opacity-100 transition-all transform translate-y-1 group-hover:translate-y-0" />
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <h4 className="text-slate-900 font-orbitron font-bold text-sm uppercase tracking-widest mb-8">Corporate</h4>
+            <ul className="space-y-4">
+              {["Global Reach", "Sustainability", "R&D Labs", "Careers"].map((link) => (
+                <li key={link}>
+                  <a href="#" className="text-slate-500 hover:text-industrial-accent text-sm font-medium transition-colors">
+                    {link}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div className="bg-white p-8 rounded-[2rem] border border-black/5 space-y-6">
+            <div className="flex items-center space-x-3 text-industrial-accent">
+              <ShieldCheck size={20} />
+              <span className="text-[10px] font-black uppercase tracking-[0.2em]">Verified Secure Protocol</span>
             </div>
-          ))}
+            <div className="text-slate-900 font-orbitron font-bold text-lg leading-tight">
+              Ready to modernize your production?
+            </div>
+            <button className="w-full py-4 bg-slate-900 text-white rounded-2xl text-xs font-black uppercase tracking-widest hover:bg-industrial-accent transition-colors">
+              Request Audit
+            </button>
+          </div>
         </div>
-        
-        {/* Cinematic Bottom Bar */}
-        <div className="pt-12 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8">
-          <div className="flex flex-col items-center md:items-start space-y-2">
-            <p className="text-industrial-steel text-[10px] font-bold uppercase tracking-[0.2em]">
-              © {currentYear} Weka Machineries & Tools FZE. Terminal Alpha.
-            </p>
-            <div className="flex items-center space-x-6">
-              {["System Status", "Compliance", "Architecture"].map(item => (
-                <span key={item} className="flex items-center text-[9px] font-black uppercase tracking-[0.2em] text-industrial-steel/60">
-                  <div className="w-1 h-1 bg-green-500 rounded-full mr-2 animate-pulse" />
-                  {item}
-                </span>
-              ))}
-            </div>
+
+        <div className="flex flex-col md:flex-row justify-between items-center pt-8 border-t border-black/5 gap-6">
+          <div className="text-slate-400 text-[10px] font-bold uppercase tracking-[0.3em]">
+            © {currentYear} WEKA Machineries FZE. All Rights Reserved.
           </div>
-          
-          <div className="flex items-center space-x-8 text-[10px] font-black uppercase tracking-[0.3em] text-industrial-steel">
-            <a href="#" className="hover:text-industrial-accent transition-colors">Nodes</a>
-            <a href="#" className="hover:text-industrial-accent transition-colors">Encryption</a>
-            <a href="#" className="hover:text-industrial-accent transition-colors">Gateway</a>
+          <div className="flex items-center space-x-8">
+             <div className="flex items-center space-x-2 text-green-600">
+               <div className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" />
+               <span className="text-[10px] uppercase font-bold tracking-widest">Global Status: Online</span>
+             </div>
+             <div className="flex items-center space-x-2 text-slate-400 cursor-pointer hover:text-slate-900 transition-colors">
+               <Globe size={14} />
+               <span className="text-[10px] uppercase font-bold tracking-widest">EN-US</span>
+             </div>
           </div>
         </div>
       </div>

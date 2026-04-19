@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, useScroll, useTransform, AnimatePresence } from "framer-motion";
-import { useRef, useState, useEffect } from "react";
+import { useRef, useState } from "react";
 import Hero3D from "./components/Hero3D";
 import ProductShowcase from "./components/ProductShowcase";
 import AnimatedFeatures from "./components/AnimatedFeatures";
@@ -17,16 +17,16 @@ import { ArrowDown, Menu, X, ChevronRight, Activity, Terminal } from "lucide-rea
 export default function Home() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { scrollY } = useScroll();
-  const headerBg = useTransform(scrollY, [0, 100], ["rgba(10,14,23,0)", "rgba(10,14,23,0.9)"]);
+  const headerBg = useTransform(scrollY, [0, 100], ["rgba(255,255,255,0)", "rgba(255,255,255,0.95)"]);
   const headerBlur = useTransform(scrollY, [0, 100], ["blur(0px)", "blur(12px)"]);
   
   const navItems = ["Home", "Products", "Gallery", "Solutions", "Contact"];
 
   return (
-    <main className="min-h-screen bg-industrial-950 font-sans selection:bg-industrial-accent selection:text-white relative">
+    <main className="min-h-screen bg-white font-sans selection:bg-industrial-accent selection:text-white relative text-slate-900">
       {/* Background Layer */}
       <ParticleBackground />
-      <div className="fixed inset-0 bg-grid-pattern opacity-[0.03] pointer-events-none z-0" style={{ backgroundSize: '60px 60px' }} />
+      <div className="fixed inset-0 bg-grid-pattern opacity-100 pointer-events-none z-0" style={{ backgroundSize: '60px 60px' }} />
 
       {/* Navigation */}
       <motion.header 
@@ -34,7 +34,7 @@ export default function Home() {
           backgroundColor: headerBg,
           backdropFilter: headerBlur,
         }}
-        className="fixed top-0 left-0 right-0 z-50 border-b border-white/5 transition-colors"
+        className="fixed top-0 left-0 right-0 z-50 border-b border-black/5 transition-colors"
       >
         <div className="max-w-7xl mx-auto px-6 lg:px-12">
           <div className="flex items-center justify-between h-24">
@@ -48,10 +48,10 @@ export default function Home() {
                 <span className="relative font-orbitron font-black text-white text-xl">W</span>
               </div>
               <div className="flex flex-col">
-                <span className="font-orbitron font-bold text-xl tracking-wider leading-none">
+                <span className="font-orbitron font-bold text-xl tracking-wider leading-none text-slate-900">
                   WEKA <span className="text-industrial-accent">MACHINERIES</span>
                 </span>
-                <span className="text-[10px] text-industrial-chrome uppercase tracking-[0.3em] font-semibold">Engineering Excellence</span>
+                <span className="text-[10px] text-slate-500 uppercase tracking-[0.3em] font-semibold">Engineering Excellence</span>
               </div>
             </motion.div>
 
@@ -64,7 +64,7 @@ export default function Home() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: i * 0.1 }}
                   href={`#${item.toLowerCase()}`}
-                  className="text-sm font-bold uppercase tracking-widest text-industrial-chrome hover:text-white transition-colors relative group"
+                  className="text-sm font-bold uppercase tracking-widest text-slate-600 hover:text-industrial-accent transition-colors relative group"
                 >
                   {item}
                   <span className="absolute -bottom-2 left-0 w-0 h-0.5 bg-industrial-accent transition-all duration-300 group-hover:w-full" />
@@ -77,7 +77,7 @@ export default function Home() {
 
             {/* Mobile Menu Button */}
             <button 
-              className="md:hidden p-3 text-industrial-chrome hover:text-white transition-colors"
+              className="md:hidden p-3 text-slate-600 hover:text-slate-950 transition-colors"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             >
               {mobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
@@ -92,14 +92,14 @@ export default function Home() {
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
-              className="md:hidden absolute top-24 left-0 right-0 bg-industrial-900 border-b border-white/5 shadow-2xl overflow-hidden"
+              className="md:hidden absolute top-24 left-0 right-0 bg-white border-b border-black/5 shadow-2xl overflow-hidden"
             >
               <div className="px-6 py-10 flex flex-col space-y-6">
                 {navItems.map((item) => (
                   <a
                     key={item}
                     href={`#${item.toLowerCase()}`}
-                    className="text-xl font-orbitron font-bold text-industrial-chrome hover:text-industrial-accent px-4"
+                    className="text-xl font-orbitron font-bold text-slate-600 hover:text-industrial-accent px-4"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     {item}
@@ -112,12 +112,11 @@ export default function Home() {
       </motion.header>
 
       {/* Hero Section */}
-      <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden">
+      <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-slate-50">
         <Hero3D />
         
         {/* Dynamic Overlays */}
-        <div className="absolute inset-0 bg-gradient-to-tr from-industrial-950 via-industrial-950/40 to-transparent pointer-events-none" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_transparent_0%,_#0a0e17_100%)] opacity-80" />
+        <div className="absolute inset-0 bg-white/40 backdrop-blur-[2px] pointer-events-none" />
 
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-12 w-full">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
@@ -131,7 +130,7 @@ export default function Home() {
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 transition={{ delay: 0.5 }}
-                className="inline-flex items-center space-x-3 px-4 py-2 rounded-full bg-white/5 border border-white/10 backdrop-blur-sm"
+                className="inline-flex items-center space-x-3 px-4 py-2 rounded-full bg-white border border-black/5 shadow-sm"
               >
                  <div className="flex space-x-1">
                   {[1, 2, 3].map(i => (
@@ -143,19 +142,17 @@ export default function Home() {
                     />
                   ))}
                 </div>
-                <span className="text-industrial-chrome text-[10px] font-bold uppercase tracking-[0.2em]">Live Engineering Core Applied</span>
+                <span className="text-slate-500 text-[10px] font-bold uppercase tracking-[0.2em]">Live Engineering Core Active</span>
               </motion.div>
               
-              <h1 className="text-5xl sm:text-7xl lg:text-8xl font-orbitron font-extrabold leading-[0.9] tracking-tighter">
+              <h1 className="text-5xl sm:text-7xl lg:text-8xl font-orbitron font-extrabold leading-[0.9] tracking-tighter text-slate-900">
                 UNRELENTING <br />
-                <span className="bg-gradient-to-r from-industrial-accent via-orange-400 to-amber-300 bg-clip-text text-transparent">
-                  PRECISION
-                </span>
+                <span className="text-industrial-accent">PRECISION</span>
               </h1>
               
-              <p className="text-lg sm:text-xl text-industrial-chrome max-w-xl leading-relaxed font-medium">
-                Pioneering industrial machinery since 1987. Engineered for maximum throughput, 
-                zero-failure durability, and peak structural integrity.
+              <p className="text-lg sm:text-xl text-slate-600 max-w-xl leading-relaxed font-medium">
+                Pioneering industrial machinery since 1987. Engineered for maximum throughput 
+                and peak structural integrity.
               </p>
               
               <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-6 pt-6">
@@ -166,9 +163,9 @@ export default function Home() {
                 </MagneticButton>
                 <motion.button
                   whileHover={{ scale: 1.02 }}
-                  className="px-10 py-5 rounded-full border border-white/10 font-bold text-sm uppercase tracking-[0.2em] transition-all text-white/80 hover:text-white hover:bg-white/5"
+                  className="px-10 py-5 rounded-full border border-black/10 font-bold text-sm uppercase tracking-[0.2em] transition-all text-slate-600 hover:text-slate-900 hover:bg-black/5"
                 >
-                  Blueprint Demo
+                  Request Blueprint
                 </motion.button>
               </div>
             </motion.div>
@@ -182,7 +179,7 @@ export default function Home() {
           className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center space-y-3"
         >
           <div className="w-px h-12 bg-gradient-to-b from-industrial-accent to-transparent" />
-          <span className="text-[10px] uppercase tracking-[0.4em] text-industrial-steel font-bold">Protocol Scroll</span>
+          <span className="text-[10px] uppercase tracking-[0.4em] text-slate-400 font-bold">Scroll Down</span>
         </motion.div>
       </section>
 

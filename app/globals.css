@@ -3,42 +3,37 @@
 @tailwind utilities;
 
 :root {
-  --foreground-rgb: 255, 255, 255;
-  --background-start-rgb: 10, 14, 23;
-  --background-end-rgb: 5, 7, 10;
+  --foreground-rgb: 15, 23, 42;
+  --background-start-rgb: 255, 255, 255;
+  --background-end-rgb: 248, 250, 252;
 }
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: radial-gradient(circle at top, #0a0e17 0%, #05070a 100%);
+  background: white;
   margin: 0;
   padding: 0;
 }
 
-/* Custom Typography */
-.font-orbitron {
-  font-family: var(--font-orbitron), sans-serif;
-}
-
-/* Smooth scrolling */
+/* Scroll handling */
 html {
-  scroll-behavior: smooth;
-  background-color: #05070a;
+  scroll-behavior: auto !important; /* Normal scroll requested */
+  background-color: white;
 }
 
-/* Custom scrollbar */
+/* Custom scrollbar - Light Theme */
 ::-webkit-scrollbar {
   width: 10px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #05070a;
+  background: #f1f5f9;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #1e2a3a;
+  background: #cbd5e1;
   border-radius: 5px;
-  border: 2px solid #05070a;
+  border: 2px solid #f1f5f9;
 }
 
 ::-webkit-scrollbar-thumb:hover {
@@ -51,31 +46,15 @@ html {
   color: white;
 }
 
-/* Focus styles */
-:focus-visible {
-  outline: 2px solid #ff6b35;
-  outline-offset: 2px;
-}
-
-/* Text Shadow */
-.text-glow {
-  text-shadow: 0 0 20px rgba(255, 107, 53, 0.4);
-}
-
-/* 3D Canvas Polish */
-canvas {
-  touch-action: none;
-}
-
-/* Glassmorphism */
+/* Glassmorphism - Light Mode */
 .glass {
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(255, 255, 255, 0.7);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.05);
 }
 
-/* Animated Grid Background */
+/* Animated Grid Background - Soft */
 @keyframes grid-move {
   0% { background-position: 0 0; }
   100% { background-position: 40px 40px; }
@@ -85,15 +64,7 @@ canvas {
   animation: grid-move 4s linear infinite;
 }
 
-/* Image Hover Scale */
-.img-zoom-container {
-  overflow: hidden;
-}
-
-.img-zoom-container img {
-  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.img-zoom-container:hover img {
-  transform: scale(1.08);
+/* Industrial Border */
+.industrial-border {
+  border: 1px solid rgba(0, 0, 0, 0.08);
 }
